@@ -1,0 +1,25 @@
+FROM kolla/centos-source-placement-base:9.0.1
+LABEL maintainer="Kolla Project (https://launchpad.net/kolla)" name="placement-api" build-date="20200121"
+
+
+
+
+
+
+    
+
+        
+        
+        
+        
+
+RUN yum -y install httpd mod_ssl mod_wsgi \
+    && yum clean all && rm -rf /var/cache/yum
+RUN sed -i -r 's,^(Listen 80),#\1,' /etc/httpd/conf/httpd.conf \
+    && sed -i -r 's,^(Listen 443),#\1,' /etc/httpd/conf.d/ssl.conf
+    
+
+
+COPY extend_start.sh /usr/local/bin/kolla_placement_extend_start
+
+
